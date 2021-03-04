@@ -43,22 +43,22 @@ public class UserManager {
     private void move(int i) {
         switch (i) {
             case 1:
-                userInsert();
+                insertUser();
                 break;
             case 2:
-                userUpdate();
+                updateUser();
                 break;
             case 3:
-                userDelete();
+                deleteUser();
                 break;
             case 4:
-                userSearch();
+                searchUser();
                 break;
         }
     }
 
 
-    private void userInsert() {
+    private void insertUser() {
 
 
         while (true) {
@@ -79,7 +79,7 @@ public class UserManager {
         }
     }
 
-    private void userUpdate() {
+    private void updateUser() {
         while (true) {
 
             showValue();
@@ -106,7 +106,7 @@ public class UserManager {
 
     }
 
-    private void userDelete() {
+    private void deleteUser() {
         while (true){
             showValue();
             System.out.print("삭제할 사용자 번호를 입력하시오. : ");
@@ -120,7 +120,7 @@ public class UserManager {
         }
     }
 
-    private void userSearch() {
+    private void searchUser() {
         while (true){
             System.out.print("검색할 사용자 이름을 입력하시오. : ");
             String name = scanner.next();
