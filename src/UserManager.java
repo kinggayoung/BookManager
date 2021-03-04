@@ -3,25 +3,24 @@ import java.util.TreeMap;
 
 public class UserManager {
     Scanner scanner;
+    Utill utill = new Utill();
     TreeMap<Integer, User> map = new TreeMap<Integer, User>();
 
     public void start() {
         scanner = new Scanner(System.in);
-        System.out.println("[사용자 관리]=====================================\n");
+
+        utill.startTitle("사용자 관리");
+        map.put(1, new User("김가영", 21, 'W'));
 
         while (true) {
-            System.out.print("1. 사용자 등록   2. 사용자 수정  3. 사용자 삭제  4. 사용자 검색\n숫자 입력 : ");
+            int i = utill.startSentence4("사용자 등록", "사용자 수정", "사용자 삭제", "사용자 등록");
 
-            int i = scanner.nextInt();
-
-            System.out.print("\n");
-
-            map.put(1, new User("김가영", 21, 'W'));
             move(i);
+
 
             showValue();
 
-            if(loop("추가로 사용자 관리하겠습니까?") == false)
+            if(utill.loop("추가로 사용자 관리하겠습니까?") == false)
                 return;
         }
 
@@ -30,12 +29,14 @@ public class UserManager {
 
     private void showValue() {
         System.out.println("사용자DB");
+        System.out.println("\n번호\t\t이름\t\t나이\t\t성별");
+
         for (int key : map.keySet()) {
             String name = map.get(key).name;
             int age = map.get(key).age;
             char gender = map.get(key).gender;
 
-            System.out.println("\n번호\t\t이름\t\t나이\t\t성별");
+
             System.out.println(key + "\t\t" + name + "\t\t" + age + "\t\t" + gender );
         }
     }
@@ -72,9 +73,18 @@ public class UserManager {
             System.out.print("성별 : ");
             char gender = scanner.next().charAt(0);
 
-            map.put(map.lastKey() + 1, new User(name, age, gender));
+            int key;
+            switch (map.size()){
+                case 0 :
+                    key = 1;
+                    break;
+                default:
+                    key = map.lastKey() + 1;
+                    break;
+            }
+            map.put(key, new User(name, age, gender));
 
-            if (loop("더 등록할 사용자가 있습니까?") == false)
+            if (utill.loop("더 등록할 사용자가 있습니까?") == false)
                 return;
         }
     }
@@ -99,7 +109,7 @@ public class UserManager {
 
 
 
-            if (loop("추가로 수정할 사용자가 있습니까?") == false)
+            if (utill.loop("추가로 수정할 사용자가 있습니까?") == false)
                 return;
 
         }
@@ -115,7 +125,9 @@ public class UserManager {
             map.remove(key);
 
 
-            if (loop("추가로 삭제할 사용자가 있습니까?") == false)
+
+
+            if (utill.loop("추가로 삭제할 사용자가 있습니까?") == false)
                 return;
         }
     }
@@ -132,16 +144,10 @@ public class UserManager {
                 }
             }
 
-            if (loop("추가로 검색할 사용자가 있습니까?") == false)
+            if (utill.loop("추가로 검색할 사용자가 있습니까?") == false)
                 return;
         }
     }
 
-    private boolean loop(String msg){
-        System.out.print("\n"+ msg + " 없으면 -1, 있으면 아무 키나 누르시오. : ");
-        if (scanner.nextInt() == -1)
-            return false;
-        return true;
-    }
 
 }

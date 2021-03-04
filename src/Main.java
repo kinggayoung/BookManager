@@ -1,21 +1,17 @@
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Main {
     static UserManager userManager = new UserManager();
     static BookManager bookManager = new BookManager();
     static RentOrReturn rentOrReturn = new RentOrReturn();
+    static Utill utill = new Utill();
 
-    static Scanner scanner;
+    public static void main(String[] args)  {
 
-    public static void main(String[] args){
-        scanner = new Scanner(System.in);
+        utill.startTitle("Main");
 
-        System.out.println("[Main]=====================================\n");
-        System.out.print("1. 사용자 관리   2. 도서 관리  3. 대여 및 반납\n숫자 입력 : ");
-
-        int i = scanner.nextInt();
-
-        System.out.print("\n");
+        int i = utill.startSentence3("사용자 관리", "도서 관리", "대여 및 반납");
 
         move(i);
 
