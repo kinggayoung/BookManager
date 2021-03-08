@@ -8,13 +8,17 @@ public class Main {
     static Utill utill = new Utill();
 
     public static void main(String[] args)  {
+        while (true) {
+            utill.startTitle("Main");
 
-        utill.startTitle("Main");
+            int i = utill.startSentence3("사용자 관리", "도서 관리", "대여 및 반납");
 
-        int i = utill.startSentence3("사용자 관리", "도서 관리", "대여 및 반납");
+            move(i);
 
-        move(i);
-
+            if (utill.loop("추가로 관리할 항목이 있습니까?") == false)
+                System.out.println("프로그램을 종료합니다. 빠빠이~★");
+                return;
+        }
 
     }
 
