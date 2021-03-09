@@ -1,6 +1,4 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package com.gayoung.bookmanager;
 
 public class Book {
     String code;
