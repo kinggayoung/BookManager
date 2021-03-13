@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.TreeMap;
 
 public class UserRepository {
-
+    // Singleton Pattern
     private static UserRepository instance;
 
     public static UserRepository getInstance() {
@@ -18,6 +18,7 @@ public class UserRepository {
 
     }
 
+    // UserManager Function
     private final TreeMap<Integer, User> idByUser = new TreeMap<>();
 
     public void addUser(User user) {
@@ -31,8 +32,10 @@ public class UserRepository {
         idByUser.put(index, user);
     }
 
-    public void updateUser(User user) {
-        idByUser.put(user.getIndex(), user);
+    public void updateUser(int index, User user) {
+        user.setIndex(index);
+
+        idByUser.put(index, user);
     }
 
     public void removeUser(int index) {

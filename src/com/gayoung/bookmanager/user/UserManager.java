@@ -1,8 +1,6 @@
-package com.gayoung.bookmanager;
+package com.gayoung.bookmanager.user;
 
-import com.gayoung.bookmanager.user.User;
-import com.gayoung.bookmanager.user.UserController;
-import com.gayoung.bookmanager.user.UserRepository;
+import com.gayoung.bookmanager.Utill;
 
 import java.util.Scanner;
 
@@ -20,6 +18,7 @@ public class UserManager {
     private UserManager() {
     }
 
+    // UserManager Funtion
     private Scanner scanner;
     private final Utill utill = new Utill();
 
@@ -60,7 +59,6 @@ public class UserManager {
     private void insertUser() {
         while (true) {
 
-            System.out.print("추가 사용자 번호를 입력하시오. : ");
             System.out.println("\n정보를 입력하시오.");
 
             System.out.print("이름 : ");
@@ -85,6 +83,8 @@ public class UserManager {
             printUserList("");
 
             System.out.print("수정할 사용자 번호를 입력하시오. : ");
+            int index = scanner.nextInt();
+
             System.out.println("\n정보를 입력하시오.");
 
             System.out.print("이름 : ");
@@ -97,7 +97,7 @@ public class UserManager {
             char gender = UserController.getInstance().readUserGender();
 
             User user = new User(name, age, gender);
-            UserRepository.getInstance().updateUser(user);
+            UserRepository.getInstance().updateUser(index, user);
 
             if (!utill.loop("추가로 수정할 사용자가 있습니까?")) {
                 return;

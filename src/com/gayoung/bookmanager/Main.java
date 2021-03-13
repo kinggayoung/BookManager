@@ -1,5 +1,8 @@
 package com.gayoung.bookmanager;
 
+import com.gayoung.bookmanager.book.BookManager;
+import com.gayoung.bookmanager.user.UserManager;
+
 public class Main {
     static UserManager userManager = UserManager.getInstance();
     static BookManager bookManager = new BookManager();
@@ -20,7 +23,10 @@ public class Main {
             }
         } while (true);
 
+
     }
+
+
 
     private static void move(int i) {
         switch (i) {
