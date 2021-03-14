@@ -1,5 +1,7 @@
 package com.gayoung.bookmanager.book;
 
+import com.gayoung.bookmanager.rent.Rent;
+
 import java.util.Collection;
 import java.util.TreeMap;
 
@@ -20,6 +22,7 @@ public class BookRepository {
     }
 
     private final TreeMap<Integer, Book> idByBook = new TreeMap<>();
+    Rent rent;
 
     public void addBook(Book book){
         int index;
@@ -51,4 +54,7 @@ public class BookRepository {
         return idByBook.values();
     }
 
+    public String getBookTitle(int index) {
+        return idByBook.get(index).getTitle();
+    }
 }

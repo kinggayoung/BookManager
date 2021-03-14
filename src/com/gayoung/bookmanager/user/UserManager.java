@@ -125,7 +125,7 @@ public class UserManager {
         }
     }
 
-    private void printUserList(String word) {
+    public void printUserList(String word) {
         System.out.println("사용자DB");
         System.out.println("\n번호\t\t이름\t\t나이\t\t성별");
         UserRepository.getInstance().getUsers()

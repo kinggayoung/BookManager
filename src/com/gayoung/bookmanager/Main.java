@@ -1,6 +1,7 @@
 package com.gayoung.bookmanager;
 
 import com.gayoung.bookmanager.book.BookManager;
+import com.gayoung.bookmanager.rent.RentOrReturn;
 import com.gayoung.bookmanager.user.UserManager;
 
 public class Main {
@@ -13,7 +14,7 @@ public class Main {
         do {
             utill.startTitle("com.gayoung.bookmanager.Main");
 
-            int i = utill.startSentence3();
+            int i = utill.startSentence3("사용자 관리", "도서 관리", "대여 및 반납");
 
             move(i);
 

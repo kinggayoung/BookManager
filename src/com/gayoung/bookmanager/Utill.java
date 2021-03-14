@@ -9,8 +9,10 @@ public class Utill {
         System.out.println("[" + msg + "]=====================================");
     }
 
-    public int startSentence3(){
-       System.out.print("1.사용자 관리\t2.도서 관리\t3. 대여 및 반납\n숫자 입력 : ");
+    public int startSentence3(String msg1, String msg2, String msg3){
+       String stringBuilder =  "1. " + msg1 + "2. " + msg2 + "3. " + msg3 + "\n숫자 입력 : ";
+        System.out.println(stringBuilder);
+
        int i = scanner.nextInt();
        System.out.print("\n");
        return i;

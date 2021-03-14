@@ -146,7 +146,7 @@ public class BookManager {
     }
 
 
-    private void printBookList(String word) {
+    public void printBookList(String word) {
         System.out.println("도서DB");
         System.out.println("\n번호\t\t분류코드\t\t제목\t\t저자\t\t장르\t\t출판일");
 

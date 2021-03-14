@@ -2,10 +2,12 @@ package com.gayoung.bookmanager.user;
 
 public class User {
 
+
     private int index;
     private final String name;
     private final int age;
     private final char gender;
+
 
     public User(String name, int age, char gender) {
         this.name = name;
@@ -35,6 +37,12 @@ public class User {
 
     @Override
     public String toString() {
-        return getIndex() + "\t\t" + getName() + "\t\t" + getAge() + "\t\t" + getGender();
+        return getIndex() + "\t\t" +
+                getName() + "\t\t" +
+                getAge() + "\t\t" +
+                getGender() + "\t\t";
     }
+
+
 }
+

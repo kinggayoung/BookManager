@@ -50,4 +50,7 @@ public class UserRepository {
         return idByUser.values();
     }
 
+    public String getUserName(int index) {
+        return idByUser.get(index).getName();
+    }
 }
