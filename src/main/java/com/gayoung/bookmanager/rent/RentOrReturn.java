@@ -33,7 +33,7 @@ public class RentOrReturn {
             executeCommand(i);
             printRentList("");
 
-            if (!utill.loop("추가로 도서를 대여 및 반납하겠습니까?")){
+            if(!utill.loop("추가로 도서를 대여 및 반납하겠습니까?")){
                 return;
             }
         }

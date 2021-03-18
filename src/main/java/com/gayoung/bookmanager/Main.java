@@ -1,8 +1,12 @@
 package com.gayoung.bookmanager;
 
 import com.gayoung.bookmanager.book.BookManager;
+import com.gayoung.bookmanager.dbConnector.DBConnector;
+import com.gayoung.bookmanager.dbConnector.DBManager;
 import com.gayoung.bookmanager.rent.RentOrReturn;
 import com.gayoung.bookmanager.user.UserManager;
+
+import java.sql.SQLException;
 
 public class Main {
     static UserManager userManager = UserManager.getInstance();
@@ -10,7 +14,10 @@ public class Main {
     static RentOrReturn rentOrReturn = new RentOrReturn();
     static Utill utill = new Utill();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        DBConnector.getInstance().connect();
+        DBManager.getInstance().initialize();
+
         do {
             utill.startTitle("com.gayoung.bookmanager.Main");
 
@@ -20,6 +27,8 @@ public class Main {
 
             if (!utill.loop("추가로 관리할 항목이 있습니까?")) {
                 System.out.println("프로그램을 종료합니다. 빠빠이~★");
+
+                DBConnector.getInstance().disconnect();
                 return;
             }
         } while (true);

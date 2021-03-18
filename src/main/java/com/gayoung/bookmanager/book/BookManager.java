@@ -95,7 +95,10 @@ public class BookManager {
 
             printBookList("");
             System.out.print("수정할 도서 번호를 입력하시오. : ");
-            int key = scanner.nextInt();
+            // int key = scanner.nextInt();
+
+            System.out.print("수정할 도서 정보를 입력하시오. \n1. 분류코드   2. 제목   3. 저자   4. 장르   5. 출판일  : ");
+            // int num = scanner.nextInt();
 
             System.out.print("분류코드 : ");
             String code = BookController.getInstance().readBookCode();
@@ -113,7 +116,7 @@ public class BookManager {
             String date = BookController.getInstance().readBookDate();
 
             Book book = new Book(code, title, author, genre, date);
-            BookRepository.getInstance().updateBook(key, book);
+            BookRepository.getInstance().updateBook(book.getIndex(), book);
 
             if (utill.loop("추가로 수정할 도서가 있습니까?") == false)
                 return;
