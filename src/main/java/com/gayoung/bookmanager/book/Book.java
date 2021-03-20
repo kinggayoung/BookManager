@@ -3,7 +3,7 @@ package com.gayoung.bookmanager.book;
 public class Book {
     private int index;
     private final String code;
-    private final String title;
+    private static String title;
     private final String author;
     private final String genre;
     private final String date;
@@ -31,7 +31,7 @@ public class Book {
         return code;
     }
 
-    public String getTitle() {
+    public static String getTitle() {
         return title;
     }
 

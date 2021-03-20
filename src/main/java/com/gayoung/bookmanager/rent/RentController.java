@@ -18,40 +18,10 @@ public class RentController {
 
     }
 
-    private final Scanner scanner = new Scanner(System.in);
 
 
-    public int readBookIndex() {
-        while (true) {
-            int bookIndex;
-
-            try {
-                bookIndex = scanner.nextInt();
-            } catch (Exception exception) {
-                System.out.print("제대로 입력 ㄱㄱ");
-                scanner.nextLine();
-                continue;
-            }
-            return bookIndex;
-        }
-
-    }
 
 
-    public int readUserIndex() {
-        while (true) {
-            int userIndex;
-
-            try {
-                userIndex = scanner.nextInt();
-            } catch (Exception exception) {
-                System.out.print("제대로 입력 ㄱㄱ");
-                scanner.nextLine();
-                continue;
-            }
-            return userIndex;
-        }
-    }
 
 
 }

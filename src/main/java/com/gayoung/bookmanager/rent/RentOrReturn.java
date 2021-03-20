@@ -1,7 +1,9 @@
 package com.gayoung.bookmanager.rent;
 
 import com.gayoung.bookmanager.Utill;
+import com.gayoung.bookmanager.book.Book;
 import com.gayoung.bookmanager.book.BookManager;
+import com.gayoung.bookmanager.book.BookRepository;
 import com.gayoung.bookmanager.user.UserManager;
 
 import java.util.Scanner;
@@ -21,12 +23,13 @@ public class RentOrReturn {
 
     private Scanner scanner;
     private final Utill utill = new Utill();
+    private RentRepository rentRepository = RentRepository.getInstance();
 
     public void start(){
         scanner = new Scanner(System.in);
 
         utill.startTitle("대여 및 반납");
-        RentRepository.getInstance().addRent(new Rent(1,1));
+        rentRepository.addRent(new Rent(1,1));
 
         while (true){
             int i = utill.startSentence3("대여하기", "반납하기", "대여현황 검색");
@@ -43,10 +46,11 @@ public class RentOrReturn {
         System.out.println("도서 대여 현황");
         System.out.println("\n번호\t\t사용자명\t\t책 제목\t\t대여일\t\t반납일");
 
-        RentRepository.getInstance().getRents()
-                .stream()
-                .filter(rent -> rent.getBookTitle().contains(word))
-                .forEach(rent -> System.out.println(rent.toString()));
+//      TODO : 다른 맵에서 가져외서 핗터 어떻게 하는거지
+//        rentRepository.getRents()
+//                .stream()
+//                .filter(rent -> Book.getTitle().contains(word))
+//                .forEach(rent -> System.out.println(rent.toString()));
     }
 
     private void executeCommand(int commandNumber) {
@@ -71,14 +75,14 @@ public class RentOrReturn {
 
             UserManager.getInstance().printUserList("");
             System.out.print("대여하실 사용자 번호를 입력하시오.");
-            int userIndex = RentController.getInstance().readUserIndex();
+            int userIndex = utill.readSaftyInt();
 
             BookManager.getInstance().printBookList("");
             System.out.print("대여할 책 번호를 입력하시오.");
-            int bookIndex = RentController.getInstance().readBookIndex();
+            int bookIndex = utill.readSaftyInt();
 
             Rent rent = new Rent(userIndex, bookIndex);
-            RentRepository.getInstance().addRent(rent);
+            rentRepository.addRent(rent);
 
             if (!utill.loop("추가로 대여하겠습니까?")){
                 return;
@@ -99,11 +103,11 @@ public class RentOrReturn {
             printRentList("");
             int returnIndex = scanner.nextInt();
 
-            int userIndex = RentRepository.getInstance().getUserIndex(returnIndex);
-            int bookIndex = RentRepository.getInstance().getBookIndex(returnIndex);
+            int userIndex = rentRepository.getUserIndex(returnIndex);
+            int bookIndex = rentRepository.getBookIndex(returnIndex);
 
             Rent rent = new Rent(userIndex, bookIndex);
-            RentRepository.getInstance().addReturn(returnIndex, rent);
+            rentRepository.addReturn(returnIndex, rent);
 
 
             if (!utill.loop("추가로 반납하시겠습니까?")){

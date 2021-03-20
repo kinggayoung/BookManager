@@ -34,19 +34,20 @@ public class RentRepository {
 
         rent.setIndex(index);
 
-        rent.setUserName(UserRepository.getInstance().getUserName(rent.userIndex));
-        rent.setBookTitle(BookRepository.getInstance().getBookTitle(rent.bookIndex));
+//        rent.setUserName(UserRepository.getInstance().getUserName(rent.userIndex));
+//        rent.setBookTitle(BookRepository.getInstance().getBookTitle(rent.bookIndex));
         rent.setRentDate(getNow());
         rent.setReturnDate("");
 
         idByRent.put(index, rent);
     }
 
+
     public void addReturn(int index, Rent rent) {
 
         rent.setIndex(index);
-        rent.setUserName(UserRepository.getInstance().getUserName(rent.userIndex));
-        rent.setBookTitle(BookRepository.getInstance().getBookTitle(rent.bookIndex));
+//        rent.setUserName(UserRepository.getInstance().getUserName(rent.userIndex));
+//        rent.setBookTitle(BookRepository.getInstance().getBookTitle(rent.bookIndex));
         rent.setRentDate(idByRent.get(index).getRentDate());
         rent.setReturnDate(getNow());
 
@@ -72,6 +73,7 @@ public class RentRepository {
 
         return format.format(now);
     }
+
 
 
 }
