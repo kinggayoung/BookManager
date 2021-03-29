@@ -1,20 +1,19 @@
 package com.gayoung.bookmanager.dbConnector;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DBManager {
-    private static DBManager instance;
+public class DBController {
+    private static DBController instance;
 
-    public static DBManager getInstance() {
+    public static DBController getInstance() {
         if (instance == null) {
-            instance = new DBManager();
+            instance = new DBController();
         }
         return instance;
     }
 
-    private DBManager() {
+    private DBController() {
 
     }
 

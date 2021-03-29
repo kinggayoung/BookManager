@@ -6,13 +6,12 @@ public class User {
     private int index;
     private final String name;
     private final int age;
-    private final char gender;
 
 
-    public User(String name, int age, char gender) {
+    public User(String name, int age) {
         this.name = name;
         this.age = age;
-        this.gender = gender;
+
     }
 
     public void setIndex(int index) {
@@ -31,16 +30,12 @@ public class User {
         return age;
     }
 
-    public char getGender() {
-        return gender;
-    }
 
     @Override
     public String toString() {
         return getIndex() + "\t\t" +
                 getName() + "\t\t" +
-                getAge() + "\t\t" +
-                getGender() + "\t\t";
+                getAge() + "\t\t" ;
     }
 
 

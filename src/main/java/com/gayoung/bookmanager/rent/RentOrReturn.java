@@ -1,14 +1,12 @@
 package com.gayoung.bookmanager.rent;
 
 import com.gayoung.bookmanager.Utill;
-import com.gayoung.bookmanager.book.Book;
-import com.gayoung.bookmanager.book.BookManager;
-import com.gayoung.bookmanager.book.BookRepository;
-import com.gayoung.bookmanager.user.UserManager;
+import com.gayoung.bookmanager.book.BookController;
+import com.gayoung.bookmanager.user.UserController;
 
 import java.util.Scanner;
 
-public class RentOrReturn {
+public class RentOrReturn{
     private static RentOrReturn instance;
     private static RentOrReturn getInstance(){
         if (instance == null){
@@ -29,7 +27,6 @@ public class RentOrReturn {
         scanner = new Scanner(System.in);
 
         utill.startTitle("대여 및 반납");
-        rentRepository.addRent(new Rent(1,1));
 
         while (true){
             int i = utill.startSentence3("대여하기", "반납하기", "대여현황 검색");
@@ -44,13 +41,9 @@ public class RentOrReturn {
 
     private void printRentList(String word) {
         System.out.println("도서 대여 현황");
-        System.out.println("\n번호\t\t사용자명\t\t책 제목\t\t대여일\t\t반납일");
+//        System.out.println("\n번호\t\t사용자명\t\t책 제목\t\t대여일\t\t반납일");
 
-//      TODO : 다른 맵에서 가져외서 핗터 어떻게 하는거지
-//        rentRepository.getRents()
-//                .stream()
-//                .filter(rent -> Book.getTitle().contains(word))
-//                .forEach(rent -> System.out.println(rent.toString()));
+        rentRepository.getAll();
     }
 
     private void executeCommand(int commandNumber) {
@@ -73,15 +66,16 @@ public class RentOrReturn {
 
             System.out.println("\n대여할 정보를 입력하시오.");
 
-            UserManager.getInstance().printUserList("");
+            UserController.getInstance().printUserList();
             System.out.print("대여하실 사용자 번호를 입력하시오.");
             int userIndex = utill.readSaftyInt();
 
-            BookManager.getInstance().printBookList("");
+            BookController.getInstance().printBookList();
             System.out.print("대여할 책 번호를 입력하시오.");
             int bookIndex = utill.readSaftyInt();
 
             Rent rent = new Rent(userIndex, bookIndex);
+
             rentRepository.addRent(rent);
 
             if (!utill.loop("추가로 대여하겠습니까?")){
@@ -103,11 +97,8 @@ public class RentOrReturn {
             printRentList("");
             int returnIndex = scanner.nextInt();
 
-            int userIndex = rentRepository.getUserIndex(returnIndex);
-            int bookIndex = rentRepository.getBookIndex(returnIndex);
-
-            Rent rent = new Rent(userIndex, bookIndex);
-            rentRepository.addReturn(returnIndex, rent);
+       //     Rent rent = new Rent(userIndex, bookIndex);
+            rentRepository.addReturn(returnIndex);
 
 
             if (!utill.loop("추가로 반납하시겠습니까?")){
@@ -119,12 +110,29 @@ public class RentOrReturn {
 
     private void searchRentList() {
         while (true){
-            System.out.print("검색할 책 제목을 입력하시오 : ");
-            printRentList(scanner.next());
+            System.out.print("검색 조회 선택 : \n1 : 책 제목   2 : 사용자 이름 ->  ");
+
+            switch (scanner.nextInt()){
+                case 1:
+                    BookController.getInstance().printBookList();
+                    System.out.print("도서 번호 입력해주세요 : ");
+                    rentRepository.get("bookID", scanner.nextInt());
+                    break;
+                case 2:
+                    UserController.getInstance().printUserList();
+                    System.out.print("사용자 번호 입력해주세요 : ");
+                    rentRepository.get("userID",scanner.nextInt());
+                    break;
+
+            }
+
+
 
             if (!utill.loop("추가로 검색할 대여목록이 있습니까?")){
                 return;
             }
         }
     }
+
+
 }

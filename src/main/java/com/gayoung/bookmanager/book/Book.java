@@ -1,37 +1,35 @@
 package com.gayoung.bookmanager.book;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 public class Book {
     private int index;
-    private final String code;
-    private static String title;
-    private final String author;
-    private final String genre;
-    private final String date;
+    private String title;
+    private String author;
+    private String genre;
+    private LocalDate date;
 
 
-
-    public Book(String code, String title, String author, String genre, String date) {
-        this.code = code;
+    public Book(int index, String title, String author, String genre, LocalDate date) {
+        this.index = index;
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.date = date;
-
     }
 
     public void setIndex(int index) {
         this.index = index;
     }
 
+
+
     public int getIndex() {
         return index;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public static String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -43,18 +41,20 @@ public class Book {
         return genre;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
+
+
     @Override
     public String toString() {
-        return  getIndex() + "\t\t" +
-                getCode() + "\t\t" +
-                getTitle() + "\t\t" +
-                getAuthor() + "\t\t" +
-                getGenre() + "\t\t" +
-                getDate() + "\t\t";
-
+        return "Book{" +
+                "index=" + index +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", genre='" + genre + '\'' +
+                ", date=" + date +
+                '}';
     }
 }

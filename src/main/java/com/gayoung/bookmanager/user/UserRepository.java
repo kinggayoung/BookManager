@@ -1,9 +1,12 @@
 package com.gayoung.bookmanager.user;
 
-import java.util.Collection;
+import com.gayoung.bookmanager.dbConnector.DBConnector;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.TreeMap;
 
-public class UserRepository {
+public class UserRepository implements IUserRepository {
     // Singleton Pattern
     private static UserRepository instance;
 
@@ -20,37 +23,131 @@ public class UserRepository {
 
     // UserManager Function
     private final TreeMap<Integer, User> idByUser = new TreeMap<>();
+    private DBConnector dbConnector = DBConnector.getInstance();
 
-    public void addUser(User user) {
+
+
+    @Override
+    public void add(User user) {
+        PreparedStatement ps = dbConnector.getPrepareStatement(
+                "insert into book_dev.user (name, age) values (?,?);"
+        );
+
+        try {
+
+            ps.setString(1, user.getName());
+            ps.setString(2, String.valueOf(user.getAge()));
+
+
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         int index;
+
         if (idByUser.size() == 0) {
             index = 1;
         } else {
             index = idByUser.lastKey() + 1;
         }
-        user.setIndex(index);
-        idByUser.put(index, user);
-    }
-
-    public void updateUser(int index, User user) {
-        user.setIndex(index);
 
         idByUser.put(index, user);
+
     }
 
-    public void removeUser(int index) {
+
+
+    @Override
+    public void delete(int index) {
+        PreparedStatement ps = dbConnector.getPrepareStatement(
+                "delete from book_dev.user where id = ?;"
+        );
+
+        try {
+            ps.setString(1, String.valueOf(index));
+
+
+            ps.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
         idByUser.remove(index);
     }
 
-    public User getUser(int index) {
-        return idByUser.get(index);
+    @Override
+    public void update(int index, User user) {
+        PreparedStatement ps = dbConnector.getPrepareStatement(
+                "update book_dev.user set name = ?, age = ? where id = ?;"
+        );
+
+        try {
+            ps.setString(1, user.getName());
+            ps.setString(2, String.valueOf(user.getAge()));
+            ps.setInt(3, index);
+
+            ps.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
-    public Collection<User> getUsers() {
-        return idByUser.values();
+
+    @Override
+    public void get(String str, String searchWord) {
+        PreparedStatement ps = dbConnector.getPrepareStatement(
+                "select * from book_dev.user where "+ str + " = ?;"
+        );
+        try {
+
+            ps.setString(1, searchWord);
+
+            ResultSet rs =  ps.executeQuery();
+
+            while (rs.next()) {
+
+                System.out.println( "User{" +
+                        "index=" + rs.getInt("id") +
+                        ", name='" + rs.getString("name") + '\'' +
+                        ", age='" + rs.getInt("age") + "'}");
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
     }
 
-    public String getUserName(int index) {
-        return idByUser.get(index).getName();
+    @Override
+    public void getAll() {
+        PreparedStatement ps = dbConnector.getPrepareStatement(
+                "select * from book_dev.user;"
+        );
+        try {
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                System.out.println( "User{" +
+                        "index=" + rs.getInt("id") +
+                        ", name='" + rs.getString("name") + '\'' +
+                        ", age='" + rs.getInt("age") + "'}");
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
+
+
+
 }

@@ -1,16 +1,14 @@
 package com.gayoung.bookmanager.rent;
 
-import com.gayoung.bookmanager.book.BookRepository;
-import com.gayoung.bookmanager.user.UserRepository;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class  Rent {
     private int index;
     public int userIndex;
-    //private String userName;
     public int bookIndex;
-    //private String bookTitle;
-    private String rentDate;
-    private String returnDate;
+    private LocalDate rentDate;
+    private LocalDate returnDate;
 
     public Rent(int userIndex, int bookIndex) {
         this.userIndex = userIndex;
@@ -32,30 +30,23 @@ public class  Rent {
         return bookIndex;
     }
 
-    public String getRentDate() {
+    public LocalDate getRentDate() {
         return rentDate;
     }
 
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-//    public String getBookTitle() {
-//        return bookTitle;
-//    }
-//
-//    public String getUserName() {
-//        return userName;
-//    }
 
     public void setIndex(int index) {
         this.index = index;
     }
-    public void setRentDate(String rentDate){
+    public void setRentDate(LocalDate rentDate){
         this.rentDate = rentDate;
     }
 
-    public void setReturnDate(String returnDate){
+    public void setReturnDate(LocalDate returnDate){
         this.returnDate = returnDate;
     }
 //
@@ -69,10 +60,11 @@ public class  Rent {
 
     @Override
     public String toString() {
-        return getIndex() + "\t\t" +
-                UserRepository.getInstance().getUserName(userIndex) + "\t\t" +
-                BookRepository.getInstance().getBookTitle(bookIndex) + "\t\t" +
-                getRentDate() + "\t\t" +
-                getReturnDate() + "\t\t" ;
+//        return getIndex() + "\t\t" +
+//                UserRepository.getInstance().getUserName(userIndex) + "\t\t" +
+//                BookRepository.getInstance().getBookTitle(bookIndex) + "\t\t" +
+//                getRentDate() + "\t\t" +
+//                getReturnDate() + "\t\t" ;
+        return "";
     }
 }

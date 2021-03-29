@@ -1,27 +1,31 @@
 package com.gayoung.bookmanager;
 
-import com.gayoung.bookmanager.book.BookManager;
+import com.gayoung.bookmanager.book.BookController;
 import com.gayoung.bookmanager.dbConnector.DBConnector;
-import com.gayoung.bookmanager.dbConnector.DBManager;
+import com.gayoung.bookmanager.dbConnector.DBController;
 import com.gayoung.bookmanager.rent.RentOrReturn;
-import com.gayoung.bookmanager.user.UserManager;
+import com.gayoung.bookmanager.user.UserController;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Main {
-    static UserManager userManager = UserManager.getInstance();
-    static BookManager bookManager = new BookManager();
+    static UserController userController = UserController.getInstance();
+    static BookController bookController = new BookController();
     static RentOrReturn rentOrReturn = new RentOrReturn();
     static Utill utill = new Utill();
 
     public static void main(String[] args) throws SQLException {
         DBConnector.getInstance().connect();
-        DBManager.getInstance().initialize();
+        DBController.getInstance().initialize();
 
         do {
             utill.startTitle("com.gayoung.bookmanager.Main");
 
             int i = utill.startSentence3("사용자 관리", "도서 관리", "대여 및 반납");
+
 
             move(i);
 
@@ -41,10 +45,10 @@ public class Main {
     private static void move(int i) {
         switch (i) {
             case 1:
-                userManager.start();
+                userController.start();
                 break;
             case 2:
-                bookManager.start();
+                bookController.start();
                 break;
             case 3:
                 rentOrReturn.start();

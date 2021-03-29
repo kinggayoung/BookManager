@@ -1,1 +1,1 @@
-"# com.gayoung.bookmanager.book.BookManager" 
+"# com.gayoung.bookmanager.book.BookController" 

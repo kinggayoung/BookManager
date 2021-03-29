@@ -61,4 +61,23 @@ public class Utill {
         }
     }
 
+    public boolean IntStringGubun(String searchWord){
+
+        boolean isNumber = true;
+
+
+        for(char c : searchWord.toCharArray()){
+            if (c >= 48 && c <= 57){
+                System.out.println(c);
+                continue;
+
+            }else{
+                isNumber = false;
+                break;
+            }
+        }
+
+        return isNumber;
+    }
+
 }
